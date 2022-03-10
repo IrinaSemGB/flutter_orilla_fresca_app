@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:orilla_fresca/constants.dart';
+import 'package:orilla_fresca/helpers/constants.dart';
+import 'package:orilla_fresca/pages/categories_page.dart';
 import 'package:orilla_fresca/widgets/icon_font_widget.dart';
 import '../widgets/login_button_widget.dart';
 
@@ -73,7 +74,12 @@ class WelcomePage extends StatelessWidget {
                   ),
                   LoginButton(
                     onPressed: () {
-                      print('Hacer Login');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CategoriesPage(),
+                        ),
+                      );
                     },
                     name: 'Hacer Login',
                     nameColor: AppColors.GREEN,
