@@ -9,7 +9,10 @@ void main() {
       fontFamily: 'Raleway',
     ),
     debugShowCheckedModeBanner: false,
-    home: CategoriesPage(),
+    home: SplashPage(
+      duration: 3,
+      goToPage: WelcomePage(),
+    ),
   ));
 }
 

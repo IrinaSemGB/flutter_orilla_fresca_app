@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
 import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/models/category.dart';
+import 'package:orilla_fresca/pages/selected_category_page.dart';
 import 'package:orilla_fresca/widgets/icon_font_widget.dart';
+import '../widgets/category_bottom_bar_widget.dart';
 import '../widgets/category_card_widget.dart';
 
 
@@ -12,6 +14,9 @@ class CategoriesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -37,27 +42,48 @@ class CategoriesPage extends StatelessWidget {
       ),
       drawer: Drawer(),
       body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: Stack(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              child: Text(
-                'Choose the category',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  child: Text(
+                    'Choose the category',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: ListView.builder(
+                    padding: EdgeInsets.only(bottom: screenHeight * 0.13),
+                      itemCount: categories.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CategoryCard(
+                          category: categories[index],
+                          onClickCard: () {
+                            print(index.toString());
+                            Navigator.push(context,
+                              MaterialPageRoute(
+                                builder: (context) => SelectedCategoryPage()
+                              ),
+                            );
+                          },
+                        );
+                      }),
+                ),
+              ],
             ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: categories.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return CategoryCard(
-                    category: categories[index],
-                  );
-                }),
+            Positioned(
+              right: 0.0,
+              left: 0.0,
+              bottom: 0.0,
+              child: CategoryBottomBar(
+                screenHeight: screenHeight,
+              ),
             ),
           ],
         ),
@@ -65,5 +91,7 @@ class CategoriesPage extends StatelessWidget {
     );
   }
 }
+
+
 
 
