@@ -4,9 +4,13 @@ import 'icon_font_widget.dart';
 
 class MainAppBar extends StatefulWidget implements PreferredSizeWidget {
 
-  Color themeColor;
+  final Color themeColor;
+  final bool showAvatar;
 
-  MainAppBar({ this.themeColor = AppColors.GREEN });
+  MainAppBar({
+    this.themeColor = AppColors.GREEN,
+    this.showAvatar = true,
+  });
 
   @override
   State<MainAppBar> createState() => _MainAppBarState();
@@ -31,11 +35,14 @@ class _MainAppBarState extends State<MainAppBar> {
         color: widget.themeColor,
       ),
       actions: [
-        Container(
-          margin: EdgeInsets.only(right: 10.0),
-          padding: EdgeInsets.all(10.0),
-          child: ClipOval(
-            child: Image.asset('assets/images/me.png'),
+        Opacity(
+          opacity: widget.showAvatar ? 1 : 0,
+          child: Container(
+            margin: EdgeInsets.only(right: 10.0),
+            padding: EdgeInsets.all(10.0),
+            child: ClipOval(
+              child: Image.asset('assets/images/me.png'),
+            ),
           ),
         ),
       ],

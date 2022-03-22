@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
 import 'package:orilla_fresca/models/subcategory.dart';
+import 'package:orilla_fresca/pages/maps_page.dart';
 import 'package:orilla_fresca/widgets/category_icon_widget.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
 import '../widgets/login_button_widget.dart';
@@ -173,7 +174,10 @@ class _DetailsPageState extends State<DetailsPage> {
                     ),
                     LoginButton(
                       onPressed: () {
-
+                        Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MapsPage(
+                          subcategory: widget.subCategory,
+                        )));
                       },
                       name: 'Location of product',
                       nameColor: Colors.white,

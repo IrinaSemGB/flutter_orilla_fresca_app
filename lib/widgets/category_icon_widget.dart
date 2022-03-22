@@ -6,11 +6,13 @@ class CategoryIcon extends StatelessWidget {
   final String icon;
   final Color color;
   final double size;
+  final double padding;
 
   CategoryIcon({
     required this.icon,
     required this.color,
     required this.size,
+    this.padding = 10.0,
   });
 
   @override
@@ -18,7 +20,7 @@ class CategoryIcon extends StatelessWidget {
     return ClipOval(
       child: Container(
         color: color,
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(padding),
         child: IconFont(
           iconName: icon,
           color: Colors.white,
