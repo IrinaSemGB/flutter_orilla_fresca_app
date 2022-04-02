@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orilla_fresca/widgets/user_profile_header.dart';
 import '../helpers/constants.dart';
 import 'icon_font_widget.dart';
 
@@ -37,12 +38,8 @@ class _MainAppBarState extends State<MainAppBar> {
       actions: [
         Opacity(
           opacity: widget.showAvatar ? 1 : 0,
-          child: Container(
-            margin: EdgeInsets.only(right: 10.0),
-            padding: EdgeInsets.all(10.0),
-            child: ClipOval(
-              child: Image.asset('assets/images/me.png'),
-            ),
+          child: UserProfileHeader(
+            showProfilePic: widget.showAvatar,
           ),
         ),
       ],

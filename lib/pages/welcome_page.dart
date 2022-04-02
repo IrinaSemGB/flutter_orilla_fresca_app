@@ -2,14 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
 import 'package:orilla_fresca/pages/categories_page.dart';
 import 'package:orilla_fresca/pages/poster_page.dart';
+import 'package:orilla_fresca/services/login_service.dart';
 import 'package:orilla_fresca/widgets/icon_font_widget.dart';
+import 'package:provider/provider.dart';
 import '../widgets/login_button_widget.dart';
 
 
 class WelcomePage extends StatelessWidget {
 
+  // LoginService loginService = LoginService();
+
   @override
   Widget build(BuildContext context) {
+
+    LoginService loginService = Provider.of<LoginService>(context, listen: false);
+
     return Scaffold(
       body: Container(
         color: Colors.black,
@@ -89,13 +96,17 @@ class WelcomePage extends StatelessWidget {
                     },
                   ),
                   LoginButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CategoriesPage(),
-                        ),
-                      );
+                    onPressed: () async {
+                      bool success = await loginService.signInWithGoogle();
+
+                      if (success) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CategoriesPage(),
+                          ),
+                        );
+                      }
                     },
                     name: 'Hacer Login',
                     nameColor: AppColors.GREEN,

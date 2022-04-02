@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>857162143474-jpm4s6u51l0phhs7r3e5cfj0bh34jfg5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.857162143474-jpm4s6u51l0phhs7r3e5cfj0bh34jfg5</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>857162143474-q7qb7iks8acpte3erb5o3nh0mkvnq5fq.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAZRBPk9FDmr8lW9jZSTvnepXVMBKnE9Ao</string>
+	<key>GCM_SENDER_ID</key>
+	<string>857162143474</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.orillaFresca</string>
+	<key>PROJECT_ID</key>
+	<string>orilla-80bd3</string>
+	<key>STORAGE_BUCKET</key>
+	<string>orilla-80bd3.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:857162143474:ios:e33cc17f1ae67f37a4626b</string>
+</dict>
+</plist>
