@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/models/category.dart';
-import 'package:orilla_fresca/pages/selected_category_page.dart';
+import 'package:orilla_fresca/services/category_selection_service.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
+import 'package:orilla_fresca/widgets/side_bare_menu.dart';
+import 'package:provider/provider.dart';
 import '../widgets/category_bottom_bar_widget.dart';
 import '../widgets/category_card_widget.dart';
 
@@ -16,9 +18,13 @@ class CategoriesPage extends StatelessWidget {
 
     final screenHeight = MediaQuery.of(context).size.height;
 
+    CategorySelectionService catSelection = Provider.of<CategorySelectionService>(context, listen: false);
+
     return Scaffold(
       appBar: MainAppBar(),
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: SideBarMenu(),
+      ),
       body: Container(
         child: Stack(
           children: [
@@ -43,13 +49,8 @@ class CategoriesPage extends StatelessWidget {
                         return CategoryCard(
                           category: categories[index],
                           onClickCard: () {
-                            Navigator.push(context,
-                              MaterialPageRoute(
-                                builder: (context) => SelectedCategoryPage(
-                                  selectedCategory: categories[index],
-                                )
-                              ),
-                            );
+                            catSelection.selectedCategory = categories[index];
+                            Navigator.of(context).pushNamed('/selected_category_page');
                           },
                         );
                       }),

@@ -4,6 +4,8 @@ import 'package:orilla_fresca/models/subcategory.dart';
 import 'package:orilla_fresca/pages/maps_page.dart';
 import 'package:orilla_fresca/widgets/category_icon_widget.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
+import 'package:provider/provider.dart';
+import '../services/category_selection_service.dart';
 import '../widgets/login_button_widget.dart';
 import '../widgets/price_count_widget.dart';
 import '../widgets/subcaterory_part_list_widget.dart';
@@ -14,16 +16,20 @@ class DetailsPage extends StatefulWidget {
   double price = 15.0;
   double cost = 0.0;
 
-  final SubCategory subCategory;
-  DetailsPage({ required this.subCategory });
+  SubCategory? subCategory;
 
   @override
   State<DetailsPage> createState() => _DetailsPageState();
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+
   @override
   Widget build(BuildContext context) {
+
+    CategorySelectionService catSelection = Provider.of<CategorySelectionService>(context, listen: false);
+    widget.subCategory = catSelection.selectedSubCategory;
+
     return Scaffold(
       body: Container(
         child: Column(
@@ -36,7 +42,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     height: 300,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage('assets/images/' + widget.subCategory.imageName + '.png'),
+                        image: AssetImage('assets/images/' + widget.subCategory!.imageName + '.png'),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -63,8 +69,8 @@ class _DetailsPageState extends State<DetailsPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CategoryIcon(
-                            icon: widget.subCategory.icon,
-                            color: widget.subCategory.color,
+                            icon: widget.subCategory!.icon,
+                            color: widget.subCategory!.color,
                             size: 50.0,
                           ),
                           Column(
@@ -82,7 +88,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               Container(
                                 padding: EdgeInsets.all(10.0),
                                 decoration: BoxDecoration(
-                                  color: widget.subCategory.color,
+                                  color: widget.subCategory!.color,
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Text(
@@ -158,7 +164,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       ),
                     ),
                     SubcategoryPartList(
-                      subCategory: widget.subCategory,
+                      subCategory: widget.subCategory!,
                     ),
                     PriceCountWidget(),
                     LoginButton(
@@ -176,7 +182,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       onPressed: () {
                         Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MapsPage(
-                          subcategory: widget.subCategory,
+
                         )));
                       },
                       name: 'Location of product',

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/models/subcategory.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
+import 'package:provider/provider.dart';
+import '../services/category_selection_service.dart';
 import '../widgets/map_bottom_pill_widget.dart';
 import '../widgets/map_user_badge_widget.dart';
 
 
 class MapsPage extends StatefulWidget {
 
-  final SubCategory subcategory;
-  MapsPage({ required this.subcategory });
+  SubCategory? subCategory;
 
   @override
   State<MapsPage> createState() => _MapsPageState();
@@ -18,6 +19,10 @@ class _MapsPageState extends State<MapsPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    CategorySelectionService catSelection = Provider.of<CategorySelectionService>(context, listen: false);
+    widget.subCategory = catSelection.selectedSubCategory;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -34,7 +39,7 @@ class _MapsPageState extends State<MapsPage> {
             right: 0,
             left: 0,
             bottom: 80.0,
-            child: MapBottomPill(subCategory: widget.subcategory),
+            child: MapBottomPill(),
           ),
           Positioned(
             right: 0,

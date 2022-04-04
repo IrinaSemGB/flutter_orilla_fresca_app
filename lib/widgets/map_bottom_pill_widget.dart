@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/models/subcategory.dart';
+import 'package:provider/provider.dart';
 import '../helpers/constants.dart';
+import '../services/category_selection_service.dart';
 import 'category_icon_widget.dart';
-import 'icon_font_widget.dart';
 
 
 class MapBottomPill extends StatelessWidget {
 
-  final SubCategory subCategory;
-  MapBottomPill({ required this.subCategory });
+  SubCategory? subCategory;
 
   @override
   Widget build(BuildContext context) {
+
+    CategorySelectionService catSelection = Provider.of<CategorySelectionService>(context, listen: false);
+    subCategory = catSelection.selectedSubCategory;
+
+
     return Container(
       margin: EdgeInsets.all(20.0),
       padding: EdgeInsets.all(15.0),
@@ -36,7 +41,7 @@ class MapBottomPill extends StatelessWidget {
                   children: [
                     ClipOval(
                       child: Image.asset(
-                        'assets/images/${subCategory.imageName}.png',
+                        'assets/images/${subCategory!.imageName}.png',
                         width: 60.0,
                         height: 60.0,
                         fit: BoxFit.cover,
@@ -46,8 +51,8 @@ class MapBottomPill extends StatelessWidget {
                       bottom: -10.0,
                       right: -10.0,
                       child: CategoryIcon(
-                        icon: subCategory.icon,
-                        color: subCategory.color,
+                        icon: subCategory!.icon,
+                        color: subCategory!.color,
                         size: 20.0,
                         padding: 5.0,
                       ),
@@ -60,7 +65,7 @@ class MapBottomPill extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        subCategory.name,
+                        subCategory!.name,
                         style: TextStyle(
                           color: Colors.grey[700],
                           fontWeight: FontWeight.bold,
@@ -79,7 +84,7 @@ class MapBottomPill extends StatelessWidget {
                 ),
                 Icon(
                   Icons.location_pin,
-                  color: subCategory.color,
+                  color: subCategory!.color,
                   size: 50.0,
                 ),
               ],
@@ -95,7 +100,7 @@ class MapBottomPill extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.0),
                     border: Border.all(
-                      color: subCategory.color,
+                      color: subCategory!.color,
                       width: 4.0,
                     ),
                     image: DecorationImage(

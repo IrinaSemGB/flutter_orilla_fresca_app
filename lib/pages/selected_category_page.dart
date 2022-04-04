@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:orilla_fresca/models/category.dart';
 import 'package:orilla_fresca/widgets/category_icon_widget.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
-
-import 'details_page.dart';
+import 'package:provider/provider.dart';
+import '../services/category_selection_service.dart';
 
 class SelectedCategoryPage extends StatelessWidget {
 
-  final Category selectedCategory;
-
-  SelectedCategoryPage({ required this.selectedCategory });
+  Category? selectedCategory;
 
   @override
   Widget build(BuildContext context) {
 
     double widthScreen = MediaQuery.of(context).size.width;
+
+    CategorySelectionService catSelection = Provider.of<CategorySelectionService>(context, listen: false);
+    selectedCategory = catSelection.selectedCategory;
 
     return Scaffold(
       appBar: MainAppBar(),
@@ -27,15 +28,15 @@ class SelectedCategoryPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CategoryIcon(
-                    icon: selectedCategory.icon,
-                    color: selectedCategory.color,
+                    icon: selectedCategory!.icon,
+                    color: selectedCategory!.color,
                     size: 20.0,
                   ),
                   SizedBox(width: 10.0),
                   Text(
-                    selectedCategory.name,
+                    selectedCategory!.name,
                     style: TextStyle(
-                      color: selectedCategory.color,
+                      color: selectedCategory!.color,
                       fontSize: 20.0,
                     ),
                   ),
@@ -46,15 +47,12 @@ class SelectedCategoryPage extends StatelessWidget {
               child: GridView.count(
                 crossAxisCount: 2,
                 children: List.generate(
-                  selectedCategory.subCategories.length,
+                  selectedCategory!.subCategories.length,
                   (index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => DetailsPage(
-                            subCategory: selectedCategory.subCategories[index],
-                          )),
-                        );
+                        catSelection.selectedSubCategory = selectedCategory!.subCategories[index];
+                        Navigator.of(context).pushNamed('/details_page');
                       },
                       child: Container(
                         child: Column(
@@ -62,7 +60,7 @@ class SelectedCategoryPage extends StatelessWidget {
                             ClipOval(
                               child: Image.asset(
                                 'assets/images/'
-                                    + selectedCategory.subCategories[index].imageName
+                                    + selectedCategory!.subCategories[index].imageName
                                     + '.png',
                                 fit: BoxFit.cover,
                                 width: widthScreen * 0.3,
@@ -70,7 +68,7 @@ class SelectedCategoryPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 10.0),
-                            Text(selectedCategory.subCategories[index].name,),
+                            Text(selectedCategory!.subCategories[index].name,),
                           ],
                         ),
                       ),

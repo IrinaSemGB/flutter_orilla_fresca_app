@@ -37,7 +37,7 @@ class LoginService {
     return true;
   }
 
-  void signOut() async {
+  Future<void> signOut() async {
     await GoogleSignIn().signOut();
     _userModel = null;
   }

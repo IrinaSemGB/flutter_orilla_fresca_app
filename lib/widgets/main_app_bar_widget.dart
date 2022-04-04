@@ -25,10 +25,15 @@ class _MainAppBarState extends State<MainAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
       centerTitle: true,
-      title: IconFont(
-        iconName: IconFontHelper.LOGO,
-        color: widget.themeColor,
-        size: 40.0,
+      title: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed('/categories_page');
+        },
+        child: IconFont(
+          iconName: IconFontHelper.LOGO,
+          color: widget.themeColor,
+          size: 40.0,
+        ),
       ),
       backgroundColor: Colors.transparent,
       elevation: 0.0,

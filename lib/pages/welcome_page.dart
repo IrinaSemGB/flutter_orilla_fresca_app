@@ -98,7 +98,6 @@ class WelcomePage extends StatelessWidget {
                   LoginButton(
                     onPressed: () async {
                       bool success = await loginService.signInWithGoogle();
-
                       if (success) {
                         Navigator.push(
                           context,
