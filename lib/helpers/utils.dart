@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
+import 'package:orilla_fresca/helpers/unit_nums.dart';
 import 'package:orilla_fresca/models/category.dart';
 import 'package:orilla_fresca/models/poster_content.dart';
 import 'package:orilla_fresca/models/subcategory.dart';
@@ -7,6 +9,9 @@ import '../models/category_part.dart';
 
 
 class Utils {
+
+  static GlobalKey<NavigatorState> mainListNav = GlobalKey();
+  static GlobalKey<NavigatorState> mainAppNav = GlobalKey();
 
   static List<PosterContent> getPosterContent() {
     return [
@@ -23,6 +28,19 @@ class Utils {
         image: 'poster3',
       ),
     ];
+  }
+
+  static String weightUnitToString(WeightUnits unit) {
+    switch(unit) {
+      case WeightUnits.Kg:
+        return 'kg.';
+      case WeightUnits.Lb:
+        return 'lb.';
+      case WeightUnits.Oz:
+        return 'oz.';
+      default:
+        return 'lb.';
+    }
   }
 
   static List<Category> getMockedCategories() {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
 import 'package:orilla_fresca/pages/categories_page.dart';
-import 'package:orilla_fresca/pages/poster_page.dart';
 import 'package:orilla_fresca/services/login_service.dart';
 import 'package:orilla_fresca/widgets/icon_font_widget.dart';
 import 'package:provider/provider.dart';
@@ -9,8 +8,6 @@ import '../widgets/login_button_widget.dart';
 
 
 class WelcomePage extends StatelessWidget {
-
-  // LoginService loginService = LoginService();
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +70,7 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: 20.0),
                   LoginButton(
                     onPressed: () {
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => CategoriesPage()));
+                      Navigator.of(context).pushNamed('/categories_page');
                     },
                     name: 'Tratar Ahora!',
                     nameColor: Colors.white,
@@ -91,8 +87,7 @@ class WelcomePage extends StatelessWidget {
                       color: AppColors.DARK_GREEN,
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => PosterPage()));
+                      Navigator.of(context).pushNamed('/poster_page');
                     },
                   ),
                   LoginButton(

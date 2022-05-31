@@ -27,7 +27,7 @@ class _MainAppBarState extends State<MainAppBar> {
       centerTitle: true,
       title: GestureDetector(
         onTap: () {
-          Navigator.of(context).pushNamed('/categories_page');
+          Navigator.of(context).popUntil((route) => route.settings.name == '/categories_page');
         },
         child: IconFont(
           iconName: IconFontHelper.LOGO,

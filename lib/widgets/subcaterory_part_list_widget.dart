@@ -38,7 +38,7 @@ class _SubcategoryPartListState extends State<SubcategoryPartList> {
                     width: 120.0,
                     decoration: BoxDecoration(
                       border: widget.subCategory.parts[index].isSelected
-                          ? Border.all(color: widget.subCategory.color, width: 7.0)
+                          ? Border.all(color: widget.subCategory.color!, width: 7.0)
                           : null,
                       borderRadius: BorderRadius.circular(25.0),
                       image: DecorationImage(

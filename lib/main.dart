@@ -7,6 +7,7 @@ import 'package:orilla_fresca/pages/poster_page.dart';
 import 'package:orilla_fresca/pages/selected_category_page.dart';
 import 'package:orilla_fresca/pages/splash_page.dart';
 import 'package:orilla_fresca/pages/welcome_page.dart';
+import 'package:orilla_fresca/services/cart_service.dart';
 import 'package:orilla_fresca/services/category_selection_service.dart';
 import 'package:orilla_fresca/services/login_service.dart';
 import 'package:provider/provider.dart';
@@ -22,8 +23,11 @@ void main() async {
         Provider(
           create: (_) => LoginService(),
         ),
-        Provider(
+        ChangeNotifierProvider(
           create: (_) => CategorySelectionService(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartService(),
         ),
       ],
       child: MaterialApp(
@@ -35,10 +39,10 @@ void main() async {
         routes: {
           '/': (context) => SplashPage(duration: 3, goToPage: WelcomePage()),
           '/welcome_page': (context) => WelcomePage(),
-          '/categories_page': (context) => CategoriesPage(), // required
-          '/selected_category_page': (context) => SelectedCategoryPage(), // required
-          '/details_page': (context) => DetailsPage(), // required
-          '/map_page': (context) => MapsPage(), // required
+          '/categories_page': (context) => CategoriesPage(),
+          '/selected_category_page': (context) => SelectedCategoryPage(),
+          '/details_page': (context) => DetailsPage(),
+          '/map_page': (context) => MapsPage(),
           '/poster_page': (context) => PosterPage(),
         },
       ),

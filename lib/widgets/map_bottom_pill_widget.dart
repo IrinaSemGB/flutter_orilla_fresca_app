@@ -51,8 +51,8 @@ class MapBottomPill extends StatelessWidget {
                       bottom: -10.0,
                       right: -10.0,
                       child: CategoryIcon(
-                        icon: subCategory!.icon,
-                        color: subCategory!.color,
+                        icon: subCategory!.icon!,
+                        color: subCategory!.color!,
                         size: 20.0,
                         padding: 5.0,
                       ),
@@ -65,7 +65,7 @@ class MapBottomPill extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        subCategory!.name,
+                        subCategory!.name!,
                         style: TextStyle(
                           color: Colors.grey[700],
                           fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class MapBottomPill extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50.0),
                     border: Border.all(
-                      color: subCategory!.color,
+                      color: subCategory!.color!,
                       width: 4.0,
                     ),
                     image: DecorationImage(

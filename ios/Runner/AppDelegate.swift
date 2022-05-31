@@ -10,7 +10,7 @@ import Firebase
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     FirebaseApp.configure()
-    YMKMapKit.setApiKey("YOUR_API_KEY")
+    YMKMapKit.setApiKey("1895e2aa-aac6-4d69-b0f8-7cc4cdddeab2")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

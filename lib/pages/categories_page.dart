@@ -3,7 +3,7 @@ import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/models/category.dart';
 import 'package:orilla_fresca/services/category_selection_service.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
-import 'package:orilla_fresca/widgets/side_bare_menu.dart';
+import 'package:orilla_fresca/widgets/side_bar_menu.dart';
 import 'package:provider/provider.dart';
 import '../widgets/category_bottom_bar_widget.dart';
 import '../widgets/category_card_widget.dart';
@@ -17,7 +17,6 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final screenHeight = MediaQuery.of(context).size.height;
-
     CategorySelectionService catSelection = Provider.of<CategorySelectionService>(context, listen: false);
 
     return Scaffold(

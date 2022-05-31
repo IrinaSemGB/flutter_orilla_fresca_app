@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/models/category.dart';
+import 'package:orilla_fresca/models/subcategory.dart';
 import 'package:orilla_fresca/widgets/category_icon_widget.dart';
 import 'package:orilla_fresca/widgets/main_app_bar_widget.dart';
 import 'package:provider/provider.dart';
@@ -28,13 +29,13 @@ class SelectedCategoryPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CategoryIcon(
-                    icon: selectedCategory!.icon,
-                    color: selectedCategory!.color,
+                    icon: selectedCategory!.icon!,
+                    color: selectedCategory!.color!,
                     size: 20.0,
                   ),
                   SizedBox(width: 10.0),
                   Text(
-                    selectedCategory!.name,
+                    selectedCategory!.name!,
                     style: TextStyle(
                       color: selectedCategory!.color,
                       fontSize: 20.0,
@@ -47,11 +48,11 @@ class SelectedCategoryPage extends StatelessWidget {
               child: GridView.count(
                 crossAxisCount: 2,
                 children: List.generate(
-                  selectedCategory!.subCategories.length,
+                  selectedCategory!.subCategories!.length,
                   (index) {
                     return GestureDetector(
                       onTap: () {
-                        catSelection.selectedSubCategory = selectedCategory!.subCategories[index];
+                        catSelection.selectedSubCategory = selectedCategory!.subCategories![index] as SubCategory?;
                         Navigator.of(context).pushNamed('/details_page');
                       },
                       child: Container(
@@ -60,7 +61,7 @@ class SelectedCategoryPage extends StatelessWidget {
                             ClipOval(
                               child: Image.asset(
                                 'assets/images/'
-                                    + selectedCategory!.subCategories[index].imageName
+                                    + selectedCategory!.subCategories![index].imageName!
                                     + '.png',
                                 fit: BoxFit.cover,
                                 width: widthScreen * 0.3,
@@ -68,7 +69,7 @@ class SelectedCategoryPage extends StatelessWidget {
                               ),
                             ),
                             SizedBox(height: 10.0),
-                            Text(selectedCategory!.subCategories[index].name,),
+                            Text(selectedCategory!.subCategories![index].name!,),
                           ],
                         ),
                       ),
