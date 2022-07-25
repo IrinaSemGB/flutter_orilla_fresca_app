@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
-import 'package:orilla_fresca/pages/welcome_page.dart';
+import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/services/login_service.dart';
 import 'package:orilla_fresca/widgets/icon_font_widget.dart';
 import 'package:provider/provider.dart';
-import '../pages/categories_page.dart';
 
 class SideBarMenu extends StatelessWidget {
 
@@ -22,41 +21,53 @@ class SideBarMenu extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextButton(
-              onPressed: () async {
-                if (userLoggedIn) {
-                  await loginService.signOut();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => WelcomePage(),
-                    ),
-                  );
-                } else {
-                  bool success = await loginService.signInWithGoogle();
-                  if (success) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CategoriesPage(),
+            Column(
+              children: [
+                TextButton(
+                  onPressed: () async {
+                    if (userLoggedIn) {
+                      await loginService.signOut();
+                      Utils.mainAppNav.currentState?.pushReplacementNamed('/welcome_page');
+                    } else {
+                      bool success = await loginService.signInWithGoogle();
+                      if (success) {
+                        Utils.mainAppNav.currentState?.pushNamed('/main_page');
+                      }
+                    }
+                  },
+                  child: Row(
+                    children: [
+                      Icon(userLoggedIn ? Icons.logout : Icons.login,
+                        color: Colors.white,
+                        size: 20.0,
                       ),
-                    );
-                  }
-                }
-              },
-              child: Row(
-                children: [
-                  Icon(userLoggedIn ? Icons.logout : Icons.login,
-                    color: Colors.white,
-                    size: 20.0,
+                      SizedBox(width: 10.0),
+                      Text(
+                        userLoggedIn ? 'Sign out' : 'Sign In',
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                    ],
                   ),
-                  SizedBox(width: 10.0),
-                  Text(
-                    userLoggedIn ? 'Sign out' : 'Sign In',
-                    style: TextStyle(color: Colors.white, fontSize: 20.0),
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(height: 10),
+                Visibility(
+                    visible: !userLoggedIn,
+                    child: TextButton(
+                        onPressed: () async {
+                          Utils.mainAppNav.currentState?.pushNamed('/welcome_page');
+                        },
+                        child: Row(
+                          children: [
+                            Icon(Icons.home, color: Colors.white, size: 20),
+                            SizedBox(width: 10),
+                            Text('Bienvenido/a',
+                                style: TextStyle(color: Colors.white, fontSize: 20)
+                            )
+                          ],
+                        )
+                    )
+                ),
+              ],
             ),
             IconFont(
               iconName: IconFontHelper.LOGO,

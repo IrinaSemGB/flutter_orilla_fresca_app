@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:orilla_fresca/models/subcategory.dart';
 
 class Category {
   String? name;
@@ -14,4 +15,16 @@ class Category {
     this.imageName,
     this.subCategories
   });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+
+    return Category(
+      color: Color(int.parse('0xFF' + json['color'])),
+      icon: json['icon'],
+      name: json['name'],
+      imageName: json['imageName'],
+      subCategories: SubCategory.fromJsonArray(json['subCategories']),
+    );
+  }
 }
+

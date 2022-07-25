@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/widgets/user_profile_header.dart';
 import '../helpers/constants.dart';
 import 'icon_font_widget.dart';
@@ -27,7 +28,7 @@ class _MainAppBarState extends State<MainAppBar> {
       centerTitle: true,
       title: GestureDetector(
         onTap: () {
-          Navigator.of(context).popUntil((route) => route.settings.name == '/categories_page');
+          Utils.mainAppNav.currentState?.popUntil((route) => route.settings.name == '/main_page');
         },
         child: IconFont(
           iconName: IconFontHelper.LOGO,

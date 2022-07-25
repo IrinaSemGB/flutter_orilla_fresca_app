@@ -101,11 +101,7 @@ class _PosterPageState extends State<PosterPage> {
                               color: AppColors.DARK_GREEN,
                             ),
                             onPressed: () {
-                              Navigator.push(context,
-                                MaterialPageRoute(
-                                  builder: (context) => CategoriesPage(),
-                                ),
-                              );
+                              Utils.mainAppNav.currentState?.pushNamed('/main_page');
                             },
                           ),
                         ),
@@ -152,8 +148,7 @@ class _PosterPageState extends State<PosterPage> {
                 color: AppColors.GREEN,
               ),
               onPressed: () {
-                Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CategoriesPage()));
+                Utils.mainAppNav.currentState?.pushNamed('/main_page');
               },
             ),
             SizedBox(height: 20.0),

@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:orilla_fresca/models/subcategory.dart';
+import 'package:orilla_fresca/services/cart_service.dart';
+import 'package:provider/provider.dart';
 import '../models/category.dart';
+import 'login_service.dart';
 
 class CategorySelectionService extends ChangeNotifier {
 
@@ -19,17 +23,51 @@ class CategorySelectionService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void incrementSubCategoryAmount() {
+  void incrementSubCategoryAmount(BuildContext context) {
     if (_selectedSubCategory != null) {
-      _selectedSubCategory!.amount++;
-      notifyListeners();
+
+      LoginService loginService = Provider.of<LoginService>(context, listen: false);
+      CartService cartService = Provider.of<CartService>(context, listen: false);
+
+      if (cartService.isSubCategoryAddedToCart(_selectedSubCategory!)) {
+        FirebaseFirestore.instance
+            .collection('shoppers')
+            .doc(loginService.loggedInUserModel?.uid)
+            .update({
+          'cartItems.${_selectedSubCategory?.imageName}':
+              FieldValue.increment(1)
+        }).then((value) {
+          _selectedSubCategory!.amount++;
+          notifyListeners();
+        });
+      } else {
+        _selectedSubCategory!.amount++;
+        notifyListeners();
+      }
     }
   }
 
-  void decrementSubCategoryAmount() {
+  void decrementSubCategoryAmount(BuildContext context) {
     if (_selectedSubCategory != null) {
-      _selectedSubCategory!.amount--;
-      notifyListeners();
+
+      LoginService loginService = Provider.of<LoginService>(context, listen: false);
+      CartService cartService = Provider.of<CartService>(context, listen: false);
+
+      if (cartService.isSubCategoryAddedToCart(_selectedSubCategory!)) {
+        FirebaseFirestore.instance
+            .collection('shoppers')
+            .doc(loginService.loggedInUserModel?.uid)
+            .update({
+          'cartItems.${_selectedSubCategory?.imageName}':
+          FieldValue.increment(-1)
+        }).then((value) {
+          _selectedSubCategory!.amount--;
+          notifyListeners();
+        });
+      } else {
+        _selectedSubCategory!.amount--;
+        notifyListeners();
+      }
     }
   }
 

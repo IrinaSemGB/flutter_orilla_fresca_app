@@ -1,8 +1,14 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:orilla_fresca/models/login_user_model.dart';
 
-class LoginService {
+class LoginService extends ChangeNotifier {
+
+  LoginService() {
+    Firebase.initializeApp();
+  }
 
   LoginUserModel? _userModel;
 
@@ -31,14 +37,20 @@ class LoginService {
         displayName: userCreds.user?.displayName,
         email: userCreds.user?.email,
         photoUrl: userCreds.user?.photoURL,
+        uid: userCreds.user?.uid,
       );
     }
 
+    notifyListeners();
     return true;
   }
 
   Future<void> signOut() async {
     await GoogleSignIn().signOut();
     _userModel = null;
+  }
+
+  bool isUserLoggedIn() {
+    return _userModel != null;
   }
 }

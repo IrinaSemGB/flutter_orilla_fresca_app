@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
+import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/services/cart_service.dart';
 import 'package:orilla_fresca/widgets/tabbar_icon_button_widget.dart';
 import 'package:provider/provider.dart';
@@ -32,8 +33,10 @@ class CategoryBottomBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TabBarIconButton(
-              icon: Icons.favorite,
-              onPressed: () {},
+              icon: Icons.list,
+              onPressed: () {
+                Utils.mainListNav.currentState?.pushReplacementNamed('/main_page/categories_page');
+              },
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(50.0),
@@ -43,7 +46,7 @@ class CategoryBottomBar extends StatelessWidget {
                   splashColor: Colors.grey[100],
                   highlightColor: Colors.grey[100],
                   onTap: () {
-
+                    Utils.mainListNav.currentState?.pushReplacementNamed('/main_page/shopping_list_page');
                   },
                   child: Container(
                     padding: EdgeInsets.all(12.0),
@@ -76,12 +79,16 @@ class CategoryBottomBar extends StatelessWidget {
               ),
             ),
             TabBarIconButton(
-              icon: Icons.pin_drop,
-              onPressed: () {},
+              icon: Icons.favorite,
+              onPressed: () {
+                Utils.mainListNav.currentState?.pushReplacementNamed('/main_page/favorites_page');
+              },
             ),
             TabBarIconButton(
               icon: Icons.settings,
-              onPressed: () {},
+              onPressed: () {
+                Utils.mainListNav.currentState?.pushReplacementNamed('/main_page/settings_page');
+              },
             ),
           ],
         ),

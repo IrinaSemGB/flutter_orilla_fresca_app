@@ -29,4 +29,27 @@ class SubCategory extends Category {
     color: color,
     imageName: imageName,
   );
+
+  factory SubCategory.fromJson(Map<String, dynamic> json) {
+    return SubCategory(
+      amount: 0,
+      unit: WeightUnits.Lb,
+      name: json['name'],
+      imageName: json['imageName'],
+      color: Color(int.parse('0xFF' + json['color'])),
+      icon: json['icon'],
+      price: double.parse(json['price']),
+      parts: CategoryPart.fromJsonArray(json['parts']),
+    );
+  }
+
+  static List<SubCategory> fromJsonArray(List<dynamic> jsonArray) {
+    List<SubCategory> subCategoriesFromJson = [];
+
+    jsonArray.forEach((jsonData) {
+      subCategoriesFromJson.add(SubCategory.fromJson(jsonData));
+    });
+
+    return subCategoriesFromJson;
+  }
 }

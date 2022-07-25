@@ -32,7 +32,7 @@ class LoginButton extends StatelessWidget {
           ),
           side: border,
           backgroundColor: backgroundColor,
-          padding: EdgeInsets.all(25.0),
+          padding: EdgeInsets.all(20.0),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orilla_fresca/helpers/constants.dart';
-import 'package:orilla_fresca/pages/categories_page.dart';
+import 'package:orilla_fresca/helpers/utils.dart';
 import 'package:orilla_fresca/services/login_service.dart';
 import 'package:orilla_fresca/widgets/icon_font_widget.dart';
 import 'package:provider/provider.dart';
@@ -36,14 +36,14 @@ class WelcomePage extends StatelessWidget {
                   Center(
                     child: ClipOval(
                       child: Container(
-                        width: 180.0,
-                        height: 180.0,
+                        width: 100.0,
+                        height: 100.0,
                         color: AppColors.GREEN,
                         alignment: Alignment.center,
                         child: IconFont(
                           iconName: IconFontHelper.MAIN_LOGO,
                           color: Colors.white,
-                          size: 130.0,
+                          size: 80.0,
                         ),
                       ),
                     ),
@@ -70,7 +70,7 @@ class WelcomePage extends StatelessWidget {
                   SizedBox(height: 20.0),
                   LoginButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/categories_page');
+                      Utils.mainAppNav.currentState?.pushNamed('/main_page');
                     },
                     name: 'Tratar Ahora!',
                     nameColor: Colors.white,
@@ -87,19 +87,14 @@ class WelcomePage extends StatelessWidget {
                       color: AppColors.DARK_GREEN,
                     ),
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/poster_page');
+                      Utils.mainAppNav.currentState?.pushNamed('/poster_page');
                     },
                   ),
                   LoginButton(
                     onPressed: () async {
                       bool success = await loginService.signInWithGoogle();
                       if (success) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CategoriesPage(),
-                          ),
-                        );
+                        Utils.mainAppNav.currentState?.pushNamed('/main_page');
                       }
                     },
                     name: 'Hacer Login',
